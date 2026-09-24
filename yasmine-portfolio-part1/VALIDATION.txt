@@ -1,0 +1,14 @@
+Static validation
+=================
+portrait_mode=RGBA
+portrait_size=1254x1254
+alpha_min=0
+alpha_max=255
+first_nontransparent_row=10
+transparent_pixel_ratio=0.341223
+sections=['home', 'work', 'service', 'experience', 'contact']
+portrait_copies=2
+project_cards=4
+service_rows=3
+experience_rows=3
+section_dots=5
