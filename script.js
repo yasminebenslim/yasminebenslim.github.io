@@ -34,6 +34,429 @@
 
   const standardEase = t => 1 - Math.pow(1 - t, 4);
 
+  const translations = {
+  fr: {
+    documentTitle: 'Yasmine Ben Slim — Ingénieure Logicielle',
+    languageLabel: 'Choisir la langue',
+
+    availability: 'Disponible pour un nouveau projet',
+
+    navWork: 'Projets',
+    navServices: 'Services',
+    navExperience: 'Expérience',
+    navContact: 'Contact',
+
+    talk: 'Parlons-en',
+
+    jobTitle: 'Ingénieure Logicielle',
+    tagline: 'Je conçois des logiciels robustes,<br>de l’IA au temps réel.',
+    collaborate: 'Collaborons',
+
+    selectedWork: '/PROJETS SÉLECTIONNÉS',
+
+    hapticType: 'SIMULATION MÉDICALE',
+    hapticTitle: 'Simulateur dentaire haptique',
+
+    recipeType: 'NLP · DEEP LEARNING',
+    recipeTitle: 'Recipe Generation Transformer',
+
+    speechType: 'MOBILE · VISION',
+    speechTitle: 'Application d’aide à l’orthophonie',
+
+    parkType: 'MOBILE · BACKEND',
+    parkTitle: 'Park and Go',
+
+    serviceWord: 'SERVICE',
+    servicesLabel: '/SERVICES',
+
+    serviceFullStack: 'Développement Full-Stack',
+    serviceAI: 'Intelligence Artificielle & NLP',
+    serviceRealtime: 'Simulation & Temps Réel',
+
+    experienceWord: 'EXPÉRIENCE',
+    experienceLabel: '/EXPÉRIENCE',
+    experienceTotal: '3+ ans d’expérience',
+
+    isrCompany: 'ISR – Université de Coimbra',
+    isrRole: 'Ingénieure R&D – Projet de fin d’études',
+    isrDate: 'Fév. 2026 – Juil. 2026',
+
+    redstartRole: 'Stagiaire développeuse Full-Stack',
+    redstartDate: 'Juin 2024 – Août 2024',
+
+    st2iRole: 'Stagiaire développeuse Backend',
+    st2iDate: 'Août 2023 – Sept. 2023',
+
+    contactAvailability: 'Disponible pour un nouveau projet',
+    contactHeadline: 'VOUS AVEZ UN PROJET<br>EN TÊTE&nbsp;?',
+
+    scroll: 'SCROLL'
+  },
+
+  en: {
+    documentTitle: 'Yasmine Ben Slim — Software Engineer',
+    languageLabel: 'Choose language',
+
+    availability: 'Available for a New Project',
+
+    navWork: 'Work',
+    navServices: 'Services',
+    navExperience: 'Experience',
+    navContact: 'Contact',
+
+    talk: 'Let’s Talk',
+
+    jobTitle: 'Software Engineer',
+    tagline: 'I build robust software,<br>from AI to real-time systems.',
+    collaborate: 'Let’s collaborate',
+
+    selectedWork: '/SELECTED WORK',
+
+    hapticType: 'MEDICAL SIMULATION',
+    hapticTitle: 'Haptic Dental Simulator',
+
+    recipeType: 'NLP · DEEP LEARNING',
+    recipeTitle: 'Recipe Generation Transformer',
+
+    speechType: 'MOBILE · VISION',
+    speechTitle: 'Speech Therapy Assistance App',
+
+    parkType: 'MOBILE · BACKEND',
+    parkTitle: 'Park and Go',
+
+    serviceWord: 'SERVICE',
+    servicesLabel: '/SERVICES',
+
+    serviceFullStack: 'Full-Stack Development',
+    serviceAI: 'Artificial Intelligence & NLP',
+    serviceRealtime: 'Simulation & Real-Time Systems',
+
+    experienceWord: 'EXPERIENCE',
+    experienceLabel: '/EXPERIENCE',
+    experienceTotal: '3+ years of experience',
+
+    isrCompany: 'ISR – University of Coimbra',
+    isrRole: 'R&D Engineer – Final-Year Project',
+    isrDate: 'Feb. 2026 – Jul. 2026',
+
+    redstartRole: 'Full-Stack Developer Intern',
+    redstartDate: 'Jun. 2024 – Aug. 2024',
+
+    st2iRole: 'Backend Developer Intern',
+    st2iDate: 'Aug. 2023 – Sep. 2023',
+
+    contactAvailability: 'Available for a New Project',
+    contactHeadline: 'HAVE A PROJECT<br>IN MIND?',
+
+    scroll: 'SCROLL'
+  }
+};
+
+
+function setText(selector, value) {
+  const element = document.querySelector(selector);
+
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+
+function setHTML(selector, value) {
+  const element = document.querySelector(selector);
+
+  if (element) {
+    element.innerHTML = value;
+  }
+}
+
+
+function applyLanguage(language, save = true) {
+  const lang = translations[language] ? language : 'fr';
+  const t = translations[lang];
+
+  document.documentElement.lang = lang;
+  document.title = t.documentTitle;
+
+
+  /* Language switcher */
+
+  const switcher = document.querySelector('.language-switcher');
+
+  if (switcher) {
+    switcher.setAttribute('aria-label', t.languageLabel);
+  }
+
+
+  document.querySelectorAll('.language-option').forEach(button => {
+    const active = button.dataset.lang === lang;
+
+    button.classList.toggle('is-active', active);
+
+    button.setAttribute(
+      'aria-pressed',
+      active ? 'true' : 'false'
+    );
+  });
+
+
+  /* Hero */
+
+  setHTML(
+    '.availability-pill',
+    '<span class="available-dot" aria-hidden="true"></span>' +
+    t.availability
+  );
+
+
+  const navLinks = document.querySelectorAll('.nav-center a');
+
+  if (navLinks[0]) {
+    navLinks[0].innerHTML =
+      `${t.navWork} <span>[04]</span>`;
+  }
+
+  if (navLinks[1]) {
+    navLinks[1].innerHTML =
+      `${t.navServices} <span>[3]</span>`;
+  }
+
+  if (navLinks[2]) {
+    navLinks[2].innerHTML =
+      `${t.navExperience} <span>[3y+]</span>`;
+  }
+
+  if (navLinks[3]) {
+    navLinks[3].textContent = t.navContact;
+  }
+
+
+  setHTML(
+    '.nav-right .pill-button',
+    `${t.talk} <span class="button-arrow" aria-hidden="true">↗</span>`
+  );
+
+
+  setText('.job-title', t.jobTitle);
+
+  setHTML('.tagline', t.tagline);
+
+
+  setHTML(
+    '.left-text-block .pill-button',
+    `${t.collaborate} <span class="button-arrow" aria-hidden="true">↗</span>`
+  );
+
+
+  /* Projects */
+
+  setText('#work-label', t.selectedWork);
+
+
+  const projectTypes =
+    document.querySelectorAll('.thumb-type');
+
+  const projectTitles =
+    document.querySelectorAll('.project-meta h2');
+
+
+  if (projectTypes[0]) {
+    projectTypes[0].textContent = t.hapticType;
+  }
+
+  if (projectTitles[0]) {
+    projectTitles[0].textContent = t.hapticTitle;
+  }
+
+
+  if (projectTypes[1]) {
+    projectTypes[1].textContent = t.recipeType;
+  }
+
+  if (projectTitles[1]) {
+    projectTitles[1].textContent = t.recipeTitle;
+  }
+
+
+  if (projectTypes[2]) {
+    projectTypes[2].textContent = t.speechType;
+  }
+
+  if (projectTitles[2]) {
+    projectTitles[2].textContent = t.speechTitle;
+  }
+
+
+  if (projectTypes[3]) {
+    projectTypes[3].textContent = t.parkType;
+  }
+
+  if (projectTitles[3]) {
+    projectTitles[3].textContent = t.parkTitle;
+  }
+
+
+  /* Services */
+
+  setText(
+    '.service-section .section-word',
+    t.serviceWord
+  );
+
+  setText(
+    '#service-label',
+    t.servicesLabel
+  );
+
+
+  const serviceTitles =
+    document.querySelectorAll('.service-row h2');
+
+
+  if (serviceTitles[0]) {
+    serviceTitles[0].textContent =
+      t.serviceFullStack;
+  }
+
+  if (serviceTitles[1]) {
+    serviceTitles[1].textContent =
+      t.serviceAI;
+  }
+
+  if (serviceTitles[2]) {
+    serviceTitles[2].textContent =
+      t.serviceRealtime;
+  }
+
+
+  /* Experience */
+
+  setText(
+    '.experience-section .section-word',
+    t.experienceWord
+  );
+
+  setText(
+    '#experience-label',
+    t.experienceLabel
+  );
+
+  setText(
+    '.experience-total',
+    t.experienceTotal
+  );
+
+
+  const experienceCompanies =
+  document.querySelectorAll('.experience-copy h2');
+
+const experienceRoles =
+  document.querySelectorAll('.experience-copy p');
+
+const experienceDates =
+  document.querySelectorAll('.experience-row time');
+
+  if (experienceCompanies[0]) {
+  experienceCompanies[0].textContent = t.isrCompany;
+}
+
+  if (experienceRoles[0]) {
+    experienceRoles[0].textContent = t.isrRole;
+  }
+
+  if (experienceDates[0]) {
+    experienceDates[0].textContent = t.isrDate;
+  }
+
+
+  if (experienceRoles[1]) {
+    experienceRoles[1].textContent =
+      t.redstartRole;
+  }
+
+  if (experienceDates[1]) {
+    experienceDates[1].textContent =
+      t.redstartDate;
+  }
+
+
+  if (experienceRoles[2]) {
+    experienceRoles[2].textContent =
+      t.st2iRole;
+  }
+
+  if (experienceDates[2]) {
+    experienceDates[2].textContent =
+      t.st2iDate;
+  }
+
+
+  /* Contact */
+
+  setHTML(
+    '.contact-availability',
+    '<span class="available-dot" aria-hidden="true"></span>' +
+    t.contactAvailability
+  );
+
+  setHTML(
+    '#contact-heading',
+    t.contactHeadline
+  );
+
+  setText(
+    '.scroll-hint > span:last-child',
+    t.scroll
+  );
+
+
+  /* Save visitor preference */
+
+  if (save) {
+    try {
+      localStorage.setItem(
+        'portfolio-language',
+        lang
+      );
+    } catch (_) {}
+  }
+
+
+  /* Recalculate portrait/layout after changing text */
+
+  requestAnimationFrame(layout);
+}
+
+
+function setupLanguageSwitcher() {
+  document
+    .querySelectorAll('.language-option')
+    .forEach(button => {
+
+      button.addEventListener('click', () => {
+        applyLanguage(button.dataset.lang);
+      });
+
+    });
+
+
+  let initialLanguage = 'fr';
+
+  try {
+
+    const saved =
+      localStorage.getItem('portfolio-language');
+
+    if (saved === 'fr' || saved === 'en') {
+      initialLanguage = saved;
+    }
+
+  } catch (_) {}
+
+
+  applyLanguage(initialLanguage, false);
+}
+
   function findFirstNonTransparentRow(img) {
     try {
       const canvas = document.createElement('canvas');
@@ -330,7 +753,7 @@
     cursorEl.setAttribute('aria-hidden', 'true');
     document.body.appendChild(cursorEl);
 
-    const interactive = 'a, .service-row, .experience-row';
+    const interactive = 'a, button, .service-row, .experience-row';
     let x = -100;
     let y = -100;
 
@@ -422,7 +845,7 @@
 
   function init() {
     window.clearTimeout(window.__motionFallback);
-
+    setupLanguageSwitcher();
     if (portraitImage.complete) measurePortrait();
     else portraitImage.addEventListener('load', measurePortrait, { once: true });
 
